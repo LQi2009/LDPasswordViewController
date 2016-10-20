@@ -79,20 +79,4 @@ static CGFloat itemLineHeight = 2.0;
     [path stroke];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @end

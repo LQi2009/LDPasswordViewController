@@ -13,10 +13,7 @@
 @interface LZPasswordViewController ()<LZNumberViewDelegate>
 {
     BOOL _isHiddenNavigationBarWhenDisappear;//记录当页面消失时是否需要隐藏系统导航
-    BOOL _isHasTabBarController;//是否含有tabbar
     BOOL _isHasNavitationController;//是否含有导航
-    
-    
 }
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -58,10 +55,6 @@
     }];
 }
 
-- (void)setStyle:(LZPasswordStyle)style {
-    
-    _style = style;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -72,8 +65,19 @@
     if (self.style == LZPasswordStyleScreen) {
         
     } else {
-        [self customUI];
+        
+        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        backBtn.frame = CGRectMake(10, 20, 44, 44);
+        [backBtn setTitle:@"╳" forState:UIControlStateNormal];
+        [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:backBtn];
     }
+}
+
+- (void)backBtnClick {
+    
+    [self dismiss];
 }
 
 - (UIScrollView *)scrollView {
@@ -82,6 +86,8 @@
         
         _scrollView = [[UIScrollView alloc]init];
         _scrollView.frame = self.view.bounds;
+        
+        // 注释掉此行代码,显示时会有bug,原因未知
         _scrollView.scrollEnabled = NO;
         _scrollView.pagingEnabled = YES;
         _scrollView.bounces = NO;
@@ -96,7 +102,6 @@
         
         _titleLabel = [[UILabel alloc]init];
         _titleLabel.frame = CGRectMake((self.view.frame.size.width - 200)/2.0, 20, 200, 44);
-//        _titleLabel.text = @"密码设置";
         _titleLabel.font = [UIFont systemFontOfSize:16];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:_titleLabel];
@@ -104,20 +109,8 @@
     
     return _titleLabel;
 }
-- (void)customUI {
-    
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(10, 20, 44, 44);
-    [backBtn setTitle:@"╳" forState:UIControlStateNormal];
-    [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backBtn];
-}
 
-- (void)backBtnClick {
-    
-    [self dismiss];
-}
+
 
 - (void)setupScroll {
     
@@ -197,6 +190,7 @@
     [self.view bringSubviewToFront:self.titleLabel];
 }
 
+#pragma mark - LZNumberViewDelegate
 - (void)numberView:(LZNumberView *)view didInput:(NSString *)string {
     
     if (self.style == LZPasswordStyleSetting) {
@@ -310,6 +304,7 @@
     
     [self dismiss];
 }
+
 - (void)numberView:(LZNumberView *)view shouldInput:(NSString *)string {
     
     

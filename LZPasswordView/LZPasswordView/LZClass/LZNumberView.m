@@ -44,6 +44,12 @@
     return self;
 }
 
+
+/**
+ 懒加载模式,不使用时,不创建
+
+ @return warnLabel
+ */
 -(UILabel *)warnLabel {
     
     if (_warnLabel == nil) {
@@ -52,7 +58,6 @@
         _warnLabel.font = [UIFont systemFontOfSize:12];
         _warnLabel.textAlignment = NSTextAlignmentCenter;
         _warnLabel.frame = CGRectMake(0, self.position*CGRectGetHeight(self.frame)*0.8, CGRectGetWidth(self.frame), 30);
-//        _warnLabel.textColor = [UIColor grayColor];
         [self addSubview:_warnLabel];
     }
     
@@ -72,50 +77,7 @@
     
     return _subWarnLabel;
 }
-- (void)setStyle:(LZNumberViewStyle)style {
-    
-    _style = style;
-    
-    if (self.items.count > 0) {
-        
-        [self.items removeAllObjects];
-    }
-    
-    switch (style) {
-        case LZNumberViewStyleNumberFour:
-        {
-            for (int i = 0; i < 4; i++) {
-                
-                LZItem *item = [[LZItem alloc]init];
-                
-//                item.backgroundColor = self.backgroundColor;
-                [self.items addObject:item];
-            }
-        } break;
-        case LZNumberViewStyleNumberSix:
-        {
-            for (int i = 0; i < 6; i++) {
-                
-                LZItem *item = [[LZItem alloc]init];
-                
-                item.backgroundColor = self.backgroundColor;
-                [self.items addObject:item];
-            }
-        } break;
-        case LZNumberViewStyleCustom:
-        {
-            [self.items removeAllObjects];
-            self.items = nil;
-        } break;
-            
-        default:
-            break;
-    }
-}
 
-- (void)setPosition:(CGFloat)position {
-    _position = position;
-}
 - (NSMutableArray *)items {
     
     if (_items == nil) {
@@ -155,6 +117,48 @@
     
     return _textBgView;
 }
+
+- (void)setStyle:(LZNumberViewStyle)style {
+    
+    _style = style;
+    
+    if (self.items.count > 0) {
+        
+        [self.items removeAllObjects];
+    }
+    
+    switch (style) {
+        case LZNumberViewStyleNumberFour:
+        {
+            for (int i = 0; i < 4; i++) {
+                
+                LZItem *item = [[LZItem alloc]init];
+                
+                //                item.backgroundColor = self.backgroundColor;
+                [self.items addObject:item];
+            }
+        } break;
+        case LZNumberViewStyleNumberSix:
+        {
+            for (int i = 0; i < 6; i++) {
+                
+                LZItem *item = [[LZItem alloc]init];
+                
+                item.backgroundColor = self.backgroundColor;
+                [self.items addObject:item];
+            }
+        } break;
+        case LZNumberViewStyleCustom:
+        {
+            [self.items removeAllObjects];
+            self.items = nil;
+        } break;
+            
+        default:
+            break;
+    }
+}
+
 
 - (void)becomeFirstResponder {
     

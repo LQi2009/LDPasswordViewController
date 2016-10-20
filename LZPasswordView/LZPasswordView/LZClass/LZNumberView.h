@@ -23,13 +23,23 @@ typedef NS_ENUM(NSInteger, LZNumberViewStyle) {
 @property (nonatomic, assign) LZNumberViewStyle style;
 @property (nonatomic, assign) id <LZNumberViewDelegate>delegate;
 
-// 中间视图Y坐标,在整个视图的Y坐标的百分比
-// 默认 0.4 中心靠上位置
+/**
+ 中间视图Y坐标,在整个视图的Y坐标的百分比
+ 默认 0.4 中心靠上位置
+ */
 @property (nonatomic, assign) CGFloat position;
 
 
+/**
+ 提示label
+ */
 @property (nonatomic, strong) UILabel *warnLabel;
+
+/**
+ 辅助提示信息
+ */
 @property (nonatomic, strong) UILabel *subWarnLabel;
+
 - (instancetype)initWithStyle:(LZNumberViewStyle)style;
 - (void)becomeFirstResponder;
 - (BOOL)resignFirstResponder;
@@ -67,8 +77,8 @@ typedef NS_ENUM(NSInteger, LZNumberViewStyle) {
 
 @interface CALayer (Anim)
 
-/*
- *  摇动
+/**
+ 摇动
  */
 -(void)shake;
 

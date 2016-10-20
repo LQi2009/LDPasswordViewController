@@ -10,24 +10,16 @@
 
 typedef NS_ENUM(NSInteger, LZPasswordStyle) {
     
-    LZPasswordStyleSetting,
-    LZPasswordStyleVerity,
-    LZPasswordStyleUpdate,
-    LZPasswordStyleScreen,
+    LZPasswordStyleSetting, // 密码设置
+    LZPasswordStyleVerity, // 密码验证
+    LZPasswordStyleUpdate, // 密码重置
+    LZPasswordStyleScreen, // 锁屏
 };
 
-typedef void(^successBlock)();
 @interface LZPasswordViewController : UIViewController
 
 @property (nonatomic, assign) LZPasswordStyle style;
 
 - (void)showInViewController:(UIViewController *)vc style:(LZPasswordStyle)style ;
-
-- (void)verifySuccess:(void(^)())success;
 @end
 
-@protocol LZPasswordDelegate <NSObject>
-
-
-
-@end

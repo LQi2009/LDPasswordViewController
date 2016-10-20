@@ -10,6 +10,7 @@
 
 static NSString *numberPasswordStateKey = @"numberPasswordStateKey";
 static NSString *numberPasswordValueKey = @"numberPasswordValueKey";
+
 @implementation LZNumberTool
 
 + (void)saveNumberPasswordEnableByUser:(BOOL)enable {
